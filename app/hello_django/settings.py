@@ -133,3 +133,18 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+if DEBUG == 0:
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.sftpstorage.SFTPStorage",
+            "OPTIONS": {
+                "SFTP_STORAGE_HOST": os.environ.get("SFTP_STORAGE_HOST"),
+                "SFTP_STORAGE_ROOT": os.environ.get("SFTP_STORAGE_ROOT"),
+                "SFTP_STORAGE_PARAMS": {
+                    "username": os.environ.get("SFTP_USERNAME"),
+                    "password": os.environ.get("SFTP_PASSWORD"),
+                },
+            },
+        },
+    }
