@@ -1,4 +1,5 @@
 Django==4.2.3
 gunicorn==21.2.0
 psycopg2-binary==2.9.6
-django-storages[sftp]==1.14.2
+django-storages==1.14.2
+paramiko>=1.15
