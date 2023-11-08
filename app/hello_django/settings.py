@@ -134,7 +134,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if DEBUG == 0:
+if DEBUG == False:
     STORAGES = {
         "default": {
             "BACKEND": "storages.backends.sftpstorage.SFTPStorage",
