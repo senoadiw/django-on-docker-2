@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage, default_storage
 from django.conf import settings
+import logging
 
 
 def image_upload(request):
@@ -8,8 +9,10 @@ def image_upload(request):
         image_file = request.FILES["image_file"]
         storage = FileSystemStorage()
         # use django-storages for production
+        logging.error("!!!!!!!!!!!!")
         if settings.DEBUG == 0:
             storage = default_storage
+            logging.error(storage)
         filename = storage.save(image_file.name, image_file)
         image_url = storage.url(filename)
         print(image_url)
