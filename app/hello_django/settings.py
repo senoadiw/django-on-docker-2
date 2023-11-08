@@ -141,9 +141,9 @@ if not DEBUG:
         "default": {
             "BACKEND": "storages.backends.sftpstorage.SFTPStorage",
             "OPTIONS": {
-                "SFTP_STORAGE_HOST": os.environ.get("SFTP_STORAGE_HOST"),
-                "SFTP_STORAGE_ROOT": os.environ.get("SFTP_STORAGE_ROOT"),
-                "SFTP_STORAGE_PARAMS": {
+                "host": os.environ.get("SFTP_STORAGE_HOST"),
+                "root_path": os.environ.get("SFTP_STORAGE_ROOT"),
+                "params": {
                     "username": os.environ.get("SFTP_USERNAME"),
                     "password": os.environ.get("SFTP_PASSWORD"),
                 },
