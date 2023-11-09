@@ -147,7 +147,7 @@ if not DEBUG:
                 "endpoint_url": os.environ.get("DJANGO_AWS_S3_ENDPOINT_URL"),
                 "file_overwrite": False,
                 "object_parameters": {
-                    "CacheControl": f"max-age=604800, s-maxage=604800, must-revalidate"
+                    "CacheControl": "max-age=604800, s-maxage=604800, must-revalidate"
                 },
             },
         },
