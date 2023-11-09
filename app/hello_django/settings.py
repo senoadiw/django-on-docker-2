@@ -153,7 +153,7 @@ if not DEBUG:
 
     STORAGES = {
         "default": {
-            "BACKEND": "storages.backends.sftpstorage.S3Storage",
+            "BACKEND": "storages.backends.s3.S3Storage",
             "OPTIONS": {
                 "access_key": os.environ.get("DJANGO_AWS_ACCESS_KEY_ID"),
                 "secret_key": os.environ.get("DJANGO_AWS_SECRET_ACCESS_KEY"),
