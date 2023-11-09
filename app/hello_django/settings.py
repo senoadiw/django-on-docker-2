@@ -139,13 +139,15 @@ DEBUG = False
 if not DEBUG:
     STORAGES = {
         "default": {
-            "BACKEND": "storages.backends.sftpstorage.SFTPStorage",
+            "BACKEND": "storages.backends.sftpstorage.S3Storage",
             "OPTIONS": {
-                "host": os.environ.get("SFTP_STORAGE_HOST"),
-                "root_path": os.environ.get("SFTP_STORAGE_ROOT"),
-                "params": {
-                    "username": os.environ.get("SFTP_USERNAME"),
-                    "password": os.environ.get("SFTP_PASSWORD"),
+                "access_key": os.environ.get("DJANGO_AWS_ACCESS_KEY_ID"),
+                "secret_key": os.environ.get("DJANGO_AWS_SECRET_ACCESS_KEY"),
+                "bucket_name": os.environ.get("DJANGO_AWS_STORAGE_BUCKET_NAME"),
+                "endpoint_url": os.environ.get("DJANGO_AWS_S3_ENDPOINT_URL"),
+                "file_overwrite": False,
+                "object_parameters": {
+                    "CacheControl": f"max-age=604800, s-maxage=604800, must-revalidate"
                 },
             },
         },

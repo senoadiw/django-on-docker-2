@@ -9,13 +9,8 @@ def image_upload(request):
         image_file = request.FILES["image_file"]
         storage = FileSystemStorage()
         # use django-storages for production
-        logging.error("!!!!!!!!!!!!")
-        logging.error(settings.DEBUG)
-        logging.error(settings.STORAGES)
         if not settings.DEBUG:
-            logging.error("@@@@@@@@@@@@")
             storage = default_storage
-            logging.error(storage)
         filename = storage.save(image_file.name, image_file)
         image_url = storage.url(filename)
         print(image_url)
