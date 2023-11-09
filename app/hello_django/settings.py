@@ -137,6 +137,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DEBUG = False
 
 if not DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+            },
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+    }
+
     STORAGES = {
         "default": {
             "BACKEND": "storages.backends.sftpstorage.S3Storage",
