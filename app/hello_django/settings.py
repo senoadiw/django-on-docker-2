@@ -174,6 +174,7 @@ if not DEBUG:
                 "bucket_name": os.environ.get("DJANGO_AWS_STATIC_STORAGE_BUCKET_NAME"),
                 "endpoint_url": os.environ.get("DJANGO_AWS_STATIC_S3_ENDPOINT_URL"),
                 "file_overwrite": True,
+                "querystring_auth": False,
                 "object_parameters": {
                     "CacheControl": "max-age=604800, s-maxage=604800, must-revalidate"
                 },
