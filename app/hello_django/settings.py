@@ -22,7 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = True
+
+if os.environ.get("ENVIRONMENT") == "production":
+    DEBUG = False
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
@@ -134,8 +137,6 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DEBUG = False
-
 if not DEBUG:
     LOGGING = {
         "version": 1,
@@ -160,6 +161,19 @@ if not DEBUG:
                 "bucket_name": os.environ.get("DJANGO_AWS_STORAGE_BUCKET_NAME"),
                 "endpoint_url": os.environ.get("DJANGO_AWS_S3_ENDPOINT_URL"),
                 "file_overwrite": False,
+                "object_parameters": {
+                    "CacheControl": "max-age=604800, s-maxage=604800, must-revalidate"
+                },
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "access_key": os.environ.get("DJANGO_AWS_STATIC_ACCESS_KEY_ID"),
+                "secret_key": os.environ.get("DJANGO_AWS_STATIC_SECRET_ACCESS_KEY"),
+                "bucket_name": os.environ.get("DJANGO_AWS_STATIC_STORAGE_BUCKET_NAME"),
+                "endpoint_url": os.environ.get("DJANGO_AWS_STATIC_S3_ENDPOINT_URL"),
+                "file_overwrite": True,
                 "object_parameters": {
                     "CacheControl": "max-age=604800, s-maxage=604800, must-revalidate"
                 },
